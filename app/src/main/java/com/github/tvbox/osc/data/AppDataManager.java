@@ -11,6 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.github.tvbox.osc.base.App;
 import com.github.tvbox.osc.util.FileUtils;
+import com.github.tvbox.osc.util.LOG;
 
 import java.io.File;
 import java.io.IOException;
@@ -125,13 +126,13 @@ public class AppDataManager {
                         @Override
                         public void onCreate(@NonNull SupportSQLiteDatabase db) {
                             super.onCreate(db);
-//                        LOG.i("数据库第一次创建成功");
+                       LOG.i("数据库第一次创建成功");
                         }
 
                         @Override
                         public void onOpen(@NonNull SupportSQLiteDatabase db) {
                             super.onOpen(db);
-//                        LOG.i("数据库打开成功");
+                       LOG.i("数据库打开成功");
                         }
                     }).allowMainThreadQueries()//可以在主线程操作
                     .build();

@@ -48,6 +48,7 @@ public abstract class BaseActivity extends AppCompatActivity implements CustomAd
                 int screenWidth = dm.widthPixels;
                 int screenHeight = dm.heightPixels;
                 screenRatio = (float) Math.max(screenWidth, screenHeight) / (float) Math.min(screenWidth, screenHeight);
+                System.out.println("screenWidth:"+screenWidth+",screenHeight:"+screenHeight+",screenRatio:"+screenRatio+"==> isBaseOnWidth:"+(!(screenRatio >= 4.0f)));
             }
         } catch (Throwable th) {
             th.printStackTrace();

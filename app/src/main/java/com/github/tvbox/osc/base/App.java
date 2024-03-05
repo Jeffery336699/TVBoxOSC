@@ -49,7 +49,7 @@ public class App extends MultiDexApplication {
     private void initParams() {
         // Hawk
         Hawk.init(this).build();
-        Hawk.put(HawkConfig.DEBUG_OPEN, false);
+        Hawk.put(HawkConfig.DEBUG_OPEN, true);
         if (!Hawk.contains(HawkConfig.PLAY_TYPE)) {
             Hawk.put(HawkConfig.PLAY_TYPE, 1);
         }
