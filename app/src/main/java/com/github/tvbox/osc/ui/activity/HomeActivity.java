@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +78,8 @@ public class HomeActivity extends BaseActivity {
     public View sortFocusView = null;
     private Handler mHandler = new Handler();
     private long mExitTime = 0;
+    public static final String TAG = "HomeActivity";
+
     private Runnable mRunnable = new Runnable() {
         @SuppressLint({"DefaultLocale", "SetTextI18n"})
         @Override
@@ -123,6 +126,7 @@ public class HomeActivity extends BaseActivity {
         this.mGridView.setAdapter(this.sortAdapter);
         this.mGridView.setOnItemListener(new TvRecyclerView.OnItemListener() {
             public void onItemPreSelected(TvRecyclerView tvRecyclerView, View view, int position) {
+                Log.i(TAG, "onItemPreSelected: ");
                 if (view != null && !HomeActivity.this.isDownOrUp) {
                     view.animate().scaleX(1.0f).scaleY(1.0f).setDuration(300).start();
                     TextView textView = view.findViewById(R.id.tvTitle);
@@ -134,6 +138,7 @@ public class HomeActivity extends BaseActivity {
             }
 
             public void onItemSelected(TvRecyclerView tvRecyclerView, View view, int position) {
+                Log.i(TAG, "onItemSelected: ");
                 if (view != null) {
                     HomeActivity.this.isDownOrUp = false;
                     HomeActivity.this.sortChange = true;
@@ -153,6 +158,7 @@ public class HomeActivity extends BaseActivity {
 
             @Override
             public void onItemClick(TvRecyclerView parent, View itemView, int position) {
+                Log.i(TAG, "onItemClick: ");
                 if (itemView != null && currentSelected == position && !sortAdapter.getItem(position).filters.isEmpty()) { // 弹出筛选
                     BaseLazyFragment baseLazyFragment = fragments.get(currentSelected);
                     if ((baseLazyFragment instanceof GridFragment)) {
