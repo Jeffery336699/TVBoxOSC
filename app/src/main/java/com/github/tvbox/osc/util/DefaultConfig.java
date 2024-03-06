@@ -49,10 +49,10 @@ public class DefaultConfig {
         }
         if (withMy){
             data.add(0, new MovieSort.SortData("my0", "我的"));
-            data.add(0, new MovieSort.SortData("my1", "我的1"));
-            data.add(0, new MovieSort.SortData("my2", "我的2"));
-            data.add(0, new MovieSort.SortData("my3", "我的3"));
-            data.add(0, new MovieSort.SortData("my4", "我的4"));
+            // data.add(0, new MovieSort.SortData("my1", "我的1"));
+            // data.add(0, new MovieSort.SortData("my2", "我的2"));
+            // data.add(0, new MovieSort.SortData("my3", "我的3"));
+            // data.add(0, new MovieSort.SortData("my4", "我的4"));
         }
         Collections.sort(data);
         return data;

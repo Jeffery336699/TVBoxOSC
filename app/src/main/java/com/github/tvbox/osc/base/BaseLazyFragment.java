@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,10 +55,12 @@ public abstract class BaseLazyFragment extends Fragment implements CustomAdapt {
     protected Context mContext;
     protected Activity mActivity;
     private LoadService mLoadService;
+    private String TAG = this.getClass().getSimpleName();
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+        Log.i(TAG, "onAttach: ");
         mContext = context;
         mActivity = (Activity) context;
     }
@@ -65,6 +68,7 @@ public abstract class BaseLazyFragment extends Fragment implements CustomAdapt {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.i(TAG, "onCreateView: ");
         AutoSize.autoConvertDensity(getActivity(), getSizeInDp(), isBaseOnWidth());
         if (null == rootView) {
             rootView = inflater.inflate(getLayoutResID(), container, false);
@@ -76,6 +80,7 @@ public abstract class BaseLazyFragment extends Fragment implements CustomAdapt {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Log.i(TAG, "onViewCreated: ");
         if (!isHidden() && getUserVisibleHint()) {
             // 可见状态,进行事件分发
             dispatchUserVisibleHint(true);
@@ -90,6 +95,7 @@ public abstract class BaseLazyFragment extends Fragment implements CustomAdapt {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
+        Log.i(TAG, "setUserVisibleHint: "+isVisibleToUser);
         // 对于情况1）不予处理，用 isViewCreated 进行判断，如果isViewCreated false，说明它没有被创建
         if (isViewCreated) {
             // 对于情况2,需要分情况考虑,如果是不可见 -> 可见 2.1
@@ -113,6 +119,7 @@ public abstract class BaseLazyFragment extends Fragment implements CustomAdapt {
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
+        Log.i(TAG, "onHiddenChanged: "+hidden);
         // 这里的可见返回为false
         if (hidden) {
             dispatchUserVisibleHint(false);
@@ -125,6 +132,7 @@ public abstract class BaseLazyFragment extends Fragment implements CustomAdapt {
      * 统一处理用户可见事件分发
      */
     private void dispatchUserVisibleHint(boolean isVisible) {
+        Log.d(TAG, "dispatchUserVisibleHint: isVisible:"+isVisible);
         // 首先考虑一下fragment嵌套fragment的情况(只考虑2层嵌套)
         if (isVisible && isParentInvisible()) {
             // 父Fragmnet此时不可见,直接return不做处理
@@ -198,6 +206,7 @@ public abstract class BaseLazyFragment extends Fragment implements CustomAdapt {
      */
     @Override
     public void onResume() {
+        Log.i(TAG, "onResume: ");
         AutoSize.autoConvertDensity(getActivity(), getSizeInDp(), isBaseOnWidth());
         super.onResume();
         // 如果不是第一次可见
@@ -218,6 +227,7 @@ public abstract class BaseLazyFragment extends Fragment implements CustomAdapt {
     @Override
     public void onPause() {
         super.onPause();
+        Log.i(TAG, "onPause: ");
         if (currentVisibleState && getUserVisibleHint()) {
             dispatchUserVisibleHint(false);
         }
@@ -226,6 +236,7 @@ public abstract class BaseLazyFragment extends Fragment implements CustomAdapt {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        Log.i(TAG, "onDestroyView: ");
         isViewCreated = false;
     }
 

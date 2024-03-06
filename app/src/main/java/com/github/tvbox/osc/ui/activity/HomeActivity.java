@@ -177,6 +177,7 @@ public class HomeActivity extends BaseActivity {
                 if (!(baseLazyFragment instanceof GridFragment)) {
                     return false;
                 }
+                // isLoad=true表示的是加载数据成功
                 if (!((GridFragment) baseLazyFragment).isLoad()) {
                     return true;
                 }
